@@ -4,9 +4,11 @@ import { UserContext } from '../../contexts/UserContext'
 const DeviceInfo = () => {
     const { deviceInfo } = useContext(UserContext)
     const [users, setUsers] = useState([])
+    const token = document.cookie.split('=')[1]
+
     const handleClick = async () => {
         try {
-            const res = await deviceInfo()
+            const res = await deviceInfo(token)
             setUsers(res)
         } catch (error) {
             console.error(error)

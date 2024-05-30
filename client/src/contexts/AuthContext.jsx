@@ -16,7 +16,6 @@ const clearAllCookies = () => {
 const URL = 'http://localhost:8000/api/auth'
 
 export const AuthProvider = ({ children }) => {
-    const token = document.cookie.split('=')[1]
 
     const register = async (user) => {
         const res = await axios.post(`${URL}/register`, user)
@@ -45,7 +44,7 @@ export const AuthProvider = ({ children }) => {
         Cookies.set('verifyPassword', res.data.token)
         return res
     }
-    const forgotPassword = async (user) => {
+    const forgotPassword = async (user, token) => {
         const res = await axios.put(`${URL}/forgotPassword/${token}`, user)
         clearAllCookies()
         return res

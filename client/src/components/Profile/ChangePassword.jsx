@@ -8,6 +8,7 @@ const ChangePassword = () => {
     const [err, setErr] = useState('')
     const [visible, setVisible] = useState(false)
     const { changePassword } = useContext(UserContext)
+    const token = document.cookie.split('=')[1]
 
     const handleChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value })
@@ -15,7 +16,7 @@ const ChangePassword = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const res = await changePassword(user)
+            const res = await changePassword(user, token)
             alert(res.data.message)
             window.history.back();
         } catch (error) {

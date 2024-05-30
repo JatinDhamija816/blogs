@@ -10,6 +10,7 @@ const ForgotPassword = () => {
     const [err, setErr] = useState('')
     const [visible, setVisible] = useState(false)
     const { forgotPassword } = useContext(AuthContext)
+    const token = document.cookie.split('=')[1]
 
     const handleChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value })
@@ -17,7 +18,7 @@ const ForgotPassword = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const res = await forgotPassword(user)
+            const res = await forgotPassword(user, token)
             alert(res.data.message)
             navigate('/login')
         } catch (error) {

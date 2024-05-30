@@ -14,7 +14,7 @@ const UpdateProfile = () => {
     const handleUpdate = async (e) => {
         e.preventDefault()
         try {
-            await updateProfile(user)
+            await updateProfile(user, token)
             window.history.back();
         } catch (error) {
             setErr(error.response.data.message)
