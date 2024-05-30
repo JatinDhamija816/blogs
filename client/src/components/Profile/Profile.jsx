@@ -4,9 +4,9 @@ import ProtectedRoute from '../../Routes/ProtectedRoute'
 import Home from './Home'
 import Navbar from '../Common/Navbar'
 import UserProfile from './UserProfile'
-import UpdateProfile from './UpdateProfile'
 import ChangePassword from './ChangePassword'
 import DeviceInfo from './DeviceInfo'
+import UpdateProfile from './UpdateProfile/UpdateProfile'
 
 const Profile = () => {
     return (

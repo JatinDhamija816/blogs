@@ -54,6 +54,30 @@ export const updateProfile = async (req, res) => {
     }
 }
 
+export const updateProfilePic = async (req, res) => {
+    try {
+        const { token } = req.params
+        const path = req.file.path
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        const userId = decodedToken.id;
+
+        const user = await User.findById(userId);
+        user.profilePic = path;
+        await user.save();
+
+        return res.status(200).json({
+            success: true,
+            message: 'Profile Picture updated successfully',
+        });
+    } catch (error) {
+        return res.status(404).json({
+            success: false,
+            message: 'Error in updateProfilePic Module',
+            error
+        })
+    }
+}
+
 export const changePassword = async (req, res) => {
     try {
         const { token } = req.params

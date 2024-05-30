@@ -21,13 +21,13 @@ const UserProfile = () => {
     return (
         <div>
             <div className='w-1/2 mx-auto'>
-                <div>
+                {/* <div>
                     <h1 className='text-center font-semibold text-3xl mt-5'>Your Profile</h1>
-                </div>
+                </div> */}
                 {
-                    <div className='flex flex-wrap justify-center'>
-                        <div className='border bg-red-500 rounded-full'>
-                            <img className='w-28 h-28 rounded-full' src={profile.profilePhoto} alt="" />
+                    <div className='flex flex-wrap justify-center mt-5'>
+                        <div className='border rounded-full'>
+                            <img className='w-28 h-28 rounded-full' src={profile.profilePic} alt="" />
                         </div>
                         <div className='drop-shadow-2xl flex w-5/6 border mx-10 my-5 justify-between px-5 py-3 bg-gray-400 text-white text-lg rounded-lg'>
                             <h1>Email</h1>

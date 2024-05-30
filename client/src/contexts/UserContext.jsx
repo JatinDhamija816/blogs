@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import axios from 'axios'
 
 export const UserContext = createContext()
@@ -11,8 +11,13 @@ export const UserProvider = ({ children }) => {
         const res = await axios.get(`${URL}/getProfile/${token}`)
         return (res.data.user)
     }
-    const updateProfile = async (user, token) => {
+    const updateProfileData = async (user, token) => {
+        console.log(user)
         const res = await axios.put(`${URL}/updateProfile/${token}`, user)
+        return (res)
+    }
+    const updateProfilePic = async (pic, token) => {
+        const res = await axios.put(`${URL}/updateProfilePic/${token}`, pic);
         return (res)
     }
     const changePassword = async (user, token) => {
@@ -24,7 +29,7 @@ export const UserProvider = ({ children }) => {
         return res.data.activity
     }
     return (
-        <UserContext.Provider value={{ getProfile, updateProfile, changePassword, deviceInfo }}>
+        <UserContext.Provider value={{ getProfile, updateProfileData, updateProfilePic, changePassword, deviceInfo }}>
             {children}
         </UserContext.Provider>)
 }

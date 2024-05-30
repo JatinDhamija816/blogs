@@ -38,7 +38,7 @@ const Navbar = () => {
                 <div className='flex px-5 py-3 justify-center items-center'>
                     <div>
                         <Link to='/profile'>
-                            <img src={profile.profilePhoto} alt="" className='w-10 h-10 mx-2 rounded-full' />
+                            <img src={profile.profilePic} alt="" className='w-10 h-10 mx-2 rounded-full' />
                         </Link>
                     </div>
                     <div>

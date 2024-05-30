@@ -1,25 +1,28 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../../contexts/UserContext'
-
-const UpdateProfile = () => {
+import { UserContext } from '../../../contexts/UserContext'
+const UpdateProfileData = () => {
     const [user, setUser] = useState({ email: null, fullName: null, username: null })
+
     const [err, setErr] = useState('')
     const [profile, setProfile] = useState({})
-    const { getProfile, updateProfile } = useContext(UserContext)
+
+    const { getProfile, updateProfileData } = useContext(UserContext)
     const token = document.cookie.split('=')[1]
 
     const handleChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value })
     }
+
     const handleUpdate = async (e) => {
         e.preventDefault()
         try {
-            await updateProfile(user, token)
+            await updateProfileData(user, token)
             window.history.back();
         } catch (error) {
-            setErr(error.response.data.message)
+            setErr(error.response)
         }
     }
+
     const handleProfile = async () => {
         try {
             const res = await getProfile(token)
@@ -33,7 +36,7 @@ const UpdateProfile = () => {
     }, [])
     return (
         <div>
-            <div className='w-2/6 mx-auto'>
+            <div className='w-3/6 mx-auto'>
                 <div>
                     <h1 className='text-center text-2xl font-bold my-5'>Update Profile</h1>
                 </div>
@@ -64,4 +67,4 @@ const UpdateProfile = () => {
         </div>
     )
 }
-export default UpdateProfile
+export default UpdateProfileData
