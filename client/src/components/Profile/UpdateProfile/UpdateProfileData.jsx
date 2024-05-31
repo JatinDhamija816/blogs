@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../../contexts/UserContext'
+
 const UpdateProfileData = () => {
     const [user, setUser] = useState({ email: null, fullName: null, username: null })
 
@@ -16,9 +17,11 @@ const UpdateProfileData = () => {
     const handleUpdate = async (e) => {
         e.preventDefault()
         try {
+            console.log('Enter in UpdateProfileData')
             await updateProfileData(user, token)
             window.history.back();
         } catch (error) {
+            console.error(error)
             setErr(error.response)
         }
     }
@@ -37,6 +40,9 @@ const UpdateProfileData = () => {
     return (
         <div>
             <div className='w-3/6 mx-auto'>
+                {
+                    console.log('Enter in updateProfileData')
+                }
                 <div>
                     <h1 className='text-center text-2xl font-bold my-5'>Update Profile</h1>
                 </div>

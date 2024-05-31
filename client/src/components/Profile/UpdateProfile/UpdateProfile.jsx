@@ -1,6 +1,6 @@
 import React from 'react'
 import UpdateProfileData from './UpdateProfileData'
-import UpdatePic from './UpdatePic'
+import UpdateProfilePic from './UpdateProfilePic'
 
 const UpdateProfile = () => {
     return (
@@ -9,7 +9,7 @@ const UpdateProfile = () => {
                 <UpdateProfileData />
             </div>
             <div className='w-1/2'>
-                <UpdatePic />
+                <UpdateProfilePic />
             </div>
         </div>
     )

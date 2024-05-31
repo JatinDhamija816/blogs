@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../../../contexts/UserContext';
 
-const UpdatePic = () => {
+const UpdateProfilePic = () => {
     const [file, setFile] = useState(null);
     const [err, setErr] = useState('')
 
@@ -16,9 +16,11 @@ const UpdatePic = () => {
         const formData = new FormData();
         formData.append('profilePic', file);
         try {
+
             await updateProfilePic(formData, token);
             window.history.back();
         } catch (error) {
+            console.error(error)
             setErr(error.response)
         }
     };
@@ -49,4 +51,4 @@ const UpdatePic = () => {
     );
 };
 
-export default UpdatePic;
+export default UpdateProfilePic;
