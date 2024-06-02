@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer'
-import User from '../models/User.js';
+import User from '../models/UserSchema.js';
 
 const sendVerifyEmail = async ({ user, Subject, purpose, token }) => {
     try {

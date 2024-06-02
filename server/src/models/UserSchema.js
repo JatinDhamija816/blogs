@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    blogs: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Blog'
+    }],
     verifyToken: String,
     verifyTokenExpiry: Date,
     resetPasswordToken: String,

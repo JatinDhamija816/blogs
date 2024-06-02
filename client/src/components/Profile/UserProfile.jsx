@@ -21,9 +21,6 @@ const UserProfile = () => {
     return (
         <div>
             <div className='w-1/2 mx-auto'>
-                {/* <div>
-                    <h1 className='text-center font-semibold text-3xl mt-5'>Your Profile</h1>
-                </div> */}
                 {
                     <div className='flex flex-wrap justify-center mt-5'>
                         <div className='border rounded-full'>

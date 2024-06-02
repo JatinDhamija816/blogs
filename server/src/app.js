@@ -3,6 +3,7 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import AuthRoute from './routes/AuthRoute.js'
 import UserRoute from './routes/UserRoute.js'
+import BlogRoute from './routes/BlogRoute.js'
 import deviceInfo from './middleware/getDevice.js'
 const app = express()
 
@@ -13,5 +14,6 @@ app.use(deviceInfo)
 
 app.use('/api/auth', AuthRoute)
 app.use('/api/user', UserRoute)
+app.use('/api/blog', BlogRoute)
 
 export default app

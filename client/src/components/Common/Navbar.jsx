@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
 import { UserContext } from '../../contexts/UserContext'
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const Navbar = () => {
     const [profile, setProfile] = useState({})
@@ -36,6 +37,9 @@ const Navbar = () => {
                     <h1 className=' font-semibold text-2xl uppercase'><Link to='/home'>Blog</Link></h1>
                 </div>
                 <div className='flex px-5 py-3 justify-center items-center'>
+                    <div className='text-lg hover:cursor-pointer mx-2'>
+                        <Link to='createBlog'><p className=''><AddCircleOutlineIcon /><span className='px-1 font-medium'>Write</span></p></Link>
+                    </div>
                     <div>
                         <Link to='/profile'>
                             <img src={profile.profilePic} alt="" className='w-10 h-10 mx-2 rounded-full' />

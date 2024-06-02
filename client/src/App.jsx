@@ -5,20 +5,23 @@ import PublicRoute from './Routes/PublicRoute'
 import ProtectedRoute from './Routes/ProtectedRoute'
 import InitialPage from './InitialPage'
 import Auth from "./components/Auth/Auth"
-import BlogHome from "./components/Blog/BlogHome"
 import Profile from "./components/Profile/Profile"
+import Blog from "./components/Blog/Blog"
+import { BlogProvider } from "./contexts/BlogContext"
 
 
 function App() {
   return (
     <AuthProvider>
       <UserProvider>
-        <Routes>
-          <Route path="/" element={<PublicRoute><InitialPage /></PublicRoute>} />
-          <Route path="/home" element={<ProtectedRoute><BlogHome /></ProtectedRoute>} />
-          <Route path="/profile/*" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        </Routes>
-        <Auth />
+        <BlogProvider>
+          <Routes>
+            <Route path="/" element={<PublicRoute><InitialPage /></PublicRoute>} />
+            <Route path="/home/*" element={<ProtectedRoute><Blog /></ProtectedRoute>} />
+            <Route path="/profile/*" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          </Routes>
+          <Auth />
+        </BlogProvider>
       </UserProvider>
     </AuthProvider>
   )

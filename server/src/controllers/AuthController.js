@@ -1,10 +1,10 @@
 import checkPassword from '../middleware/CheckPassword.js'
 import generateToken from '../utils/generateToken.js'
 import sendVerifyEmail from '../utils/sendVerifyEmail.js'
-import User from '../models/User.js'
+import User from '../models/UserSchema.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
-import Activity from '../models/Activity.js'
+import Activity from '../models/ActivitySchema.js'
 
 export const register = async (req, res) => {
     try {
@@ -55,9 +55,11 @@ export const register = async (req, res) => {
             message: 'User Registered Successfully. Check Your Email for Verification link '
         })
     } catch (error) {
+        console.error('Error in User Register Controller ', error)
         return res.status(500).json({
             success: false,
-            message: 'Error in Register Module'
+            message: 'Error in Register Module',
+            error
         })
     }
 }
@@ -66,6 +68,7 @@ export const verifyEmail = async (req, res) => {
     try {
         const { token } = req.params
         const { id } = jwt.verify(token, process.env.JWT_SECRET)
+
         const user = await User.findById(id)
         if (!user) {
             return res.status(400).json({
@@ -83,6 +86,7 @@ export const verifyEmail = async (req, res) => {
             message: 'Email Verified Successfully'
         })
     } catch (error) {
+        console.error('An error occurred during verification. Please try again later. ', error)
         if (error.name === 'TokenExpiredError') {
             return res.status(400).json({
                 success: false,
@@ -98,7 +102,7 @@ export const verifyEmail = async (req, res) => {
         return res.status(500).json({
             success: false,
             message: 'An error occurred during verification. Please try again later.',
-            error: error.message
+            error: error
         });
     }
 }
@@ -145,7 +149,9 @@ export const login = async (req, res) => {
     } catch (error) {
         console.error('Error in login module:', error);
         return res.status(500).json({
-            success: false, message: 'Internal server error.'
+            success: false,
+            message: 'Internal server error.',
+            error
         })
     }
 }
@@ -156,13 +162,17 @@ export const logout = async (req, res) => {
             expires: new Date(0),
             httpOnly: true
         });
+
         return res.status(200).json({
-            success: true, message: 'Logout successful'
+            success: true,
+            message: 'Logout successful'
         });
     } catch (error) {
+        console.error('Error in Logout module', error)
         return res.status(500).json({
             success: false,
-            message: 'Error in Logout module'
+            message: 'Error in Logout module',
+            error
         })
     }
 }
@@ -188,9 +198,11 @@ export const checkEmail = async (req, res) => {
             message: 'Password reset Email sent ',
         })
     } catch (error) {
+        console.error('Error in CheckEmail Module', error)
         return res.status(400).json({
             succes: false,
             message: 'Error in checkEmail module',
+            error
         })
     }
 }
@@ -198,6 +210,7 @@ export const checkEmail = async (req, res) => {
 export const verifyPasswordToken = async (req, res) => {
     try {
         const { token } = req.params
+
         const { id } = jwt.verify(token, process.env.JWT_SECRET)
         const user = await User.findById(id)
         if (!user) {
@@ -214,6 +227,7 @@ export const verifyPasswordToken = async (req, res) => {
             token
         })
     } catch (error) {
+        console.error('Error in verify Password Token', error)
         if (error.name === 'TokenExpiredError') {
             return res.status(400).json({
                 success: false,
@@ -228,8 +242,8 @@ export const verifyPasswordToken = async (req, res) => {
         }
         return res.status(500).json({
             success: false,
-            message: 'An error occurred during verification. Please try again later.',
-            error: error.message
+            message: 'An error occurred during verification of Password Token. Please try again later.',
+            error
         });
     }
 }
@@ -265,7 +279,7 @@ export const forgotPassword = async (req, res) => {
             message: 'Password updated successfully',
         });
     } catch (error) {
-        console.error(error)
+        console.error('Error in Reset Password Module', error)
         return res.status(404).json({
             success: false,
             message: 'Error in Reset Password Module',

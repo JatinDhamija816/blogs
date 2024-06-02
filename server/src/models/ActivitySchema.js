@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import User from "./User.js";
+import User from "./UserSchema.js";
 
 const activitySchema = new mongoose.Schema({
     userId: {

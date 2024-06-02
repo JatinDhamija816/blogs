@@ -7,6 +7,7 @@ import UserProfile from './UserProfile'
 import ChangePassword from './ChangePassword'
 import DeviceInfo from './DeviceInfo'
 import UpdateProfile from './UpdateProfile/UpdateProfile'
+import UserBlogs from './UserBlogs'
 
 const Profile = () => {
     return (
@@ -18,6 +19,7 @@ const Profile = () => {
                 <Route path='/updateProfile' element={<ProtectedRoute><UpdateProfile /></ProtectedRoute>} />
                 <Route path='/changePassword' element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
                 <Route path='/deviceInfo' element={<ProtectedRoute><DeviceInfo /></ProtectedRoute>} />
+                <Route path='/userBlogs' element={<ProtectedRoute><UserBlogs /></ProtectedRoute>} />
             </Routes>
         </div>
     )

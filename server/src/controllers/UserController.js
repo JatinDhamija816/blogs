@@ -1,15 +1,17 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import checkPassword from '../middleware/CheckPassword.js'
-import User from '../models/User.js';
-import Activity from '../models/Activity.js'
+import User from '../models/UserSchema.js';
+import Activity from '../models/ActivitySchema.js'
 
 export const getProfile = async (req, res) => {
     try {
         const { token } = req.params
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+
         const userId = decodedToken.id;
         const user = await User.findById(userId);
+
         return res.status(200).json({
             succes: true,
             message: 'User Profile',
@@ -45,7 +47,7 @@ export const updateProfile = async (req, res) => {
             message: 'Profile updated successfully',
         });
     } catch (error) {
-        console.error(error)
+        console.error('Error in UpdateProfile Controller', error)
         return res.status(404).json({
             success: false,
             message: 'Error in updateProfile Module',
@@ -58,6 +60,7 @@ export const updateProfilePic = async (req, res) => {
     try {
         const { token } = req.params
         const path = req.file.path
+
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
         const userId = decodedToken.id;
 
@@ -70,6 +73,7 @@ export const updateProfilePic = async (req, res) => {
             message: 'Profile Picture updated successfully',
         });
     } catch (error) {
+        console.error('Error in UpdateProfilePic Controller', error)
         return res.status(404).json({
             success: false,
             message: 'Error in updateProfilePic Module',
@@ -108,24 +112,40 @@ export const changePassword = async (req, res) => {
         }
         user.password = hashedPassword
         await user.save()
+
         return res.status(200).json({
             success: true,
             message: 'Password updated successfully',
         });
     } catch (error) {
+        console.error('Error in Change password Controller ', error)
         return res.status(404).json({
             success: false,
-            message: 'Error in Change Password Module'
+            message: 'Error in Change Password Module',
+            error
         })
     }
 }
 
 export const deviceInfo = async (req, res) => {
-    const { token } = req.params
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-    const userId = decodedToken.id;
-    const activity = await Activity.find({ userId })
-    return res.send({
-        message: "User found", activity
-    })
+    try {
+        const { token } = req.params
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+
+        const userId = decodedToken.id;
+        const activity = await Activity.find({ userId })
+
+        return res.status(200).json({
+            success: true,
+            message: "All Activity of User",
+            activity
+        })
+    } catch (error) {
+        console.error('Error in Device Info Controller', error)
+        return res.status(500).json({
+            success: false,
+            message: "Error in Device Info Controller",
+            error
+        })
+    }
 }
