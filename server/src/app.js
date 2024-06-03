@@ -8,7 +8,7 @@ import deviceInfo from './middleware/getDevice.js'
 const app = express()
 
 // app.use(cors({ origin: 'https://blogs-xi-six.vercel.app/', credentials: true }))
-const allowedOrigins = ['https://blogs-xi-six.vercel.app/*', 'https://another-allowed-origin.com'];
+const allowedOrigins = ['/^https:\/\/blogs-xi-six\.vercel\.app($|\/.*)/', 'https://another-allowed-origin.com'];
 app.use(cors({
     origin: function (origin, callback) {
         if (!origin || allowedOrigins.includes(origin)) {
