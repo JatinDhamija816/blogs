@@ -16,7 +16,6 @@ const Main = () => {
     const handleBlogs = async () => {
         try {
             const res = await getAllBlog()
-            console.log(res.data.blogs)
             // const userId = res.data.blog.author._id
             // const res1 = await getProfileById(userId)
             // setProfile(res1)
