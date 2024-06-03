@@ -97,7 +97,6 @@ export const getBlogById = async (req, res) => {
         const { id } = req.params
 
         const blog = await Blog.findById(id).populate('author', 'username')
-        console.log(blog)
         return res.status(200).json({
             success: true,
             message: 'Blog By id',
