@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const UserContext = createContext()
 
-const URL = 'http://localhost:8000/api/user'
+const URL = 'https://blogs-q477.onrender.com/api/user'
 
 export const UserProvider = ({ children }) => {
 
