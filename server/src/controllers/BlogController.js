@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import Blog from '../models/blogSchema.js'
+import Blog from '../models/BlogSchema.js'
 import User from '../models/UserSchema.js'
 
 export const createBlog = async (req, res) => {
