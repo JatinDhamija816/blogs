@@ -7,9 +7,9 @@ import BlogRoute from './routes/BlogRoute.js'
 import deviceInfo from './middleware/getDevice.js'
 const app = express()
 
-// app.use(cors({ origin: 'https://blogs-xi-six.vercel.app/', credentials: true }))
-const allowedOrigins = ['/^https:\/\/blogs-xi-six\.vercel\.app($|\/.*)/', 'https://another-allowed-origin.com'];
-app.use(cors({
+const allowedOrigins = ['https://blogs-xi-six.vercel.app'];
+
+const corsOptions = {
     origin: function (origin, callback) {
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
@@ -17,8 +17,9 @@ app.use(cors({
             callback(new Error('Not allowed by CORS'));
         }
     },
-    credentials: true
-}));
+    credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(express.json())
 app.use(cookieParser())
 app.use(deviceInfo)
