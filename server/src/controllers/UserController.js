@@ -27,6 +27,27 @@ export const getProfile = async (req, res) => {
     }
 }
 
+export const getProfileById = async (req, res) => {
+    try {
+        const { id } = req.params
+
+        const user = await User.findById(id);
+
+        return res.status(200).json({
+            succes: true,
+            message: 'User Profile',
+            user
+        })
+    } catch (error) {
+        console.error('Error in getProfile Module', error)
+        return res.status(500).json({
+            success: false,
+            message: 'Internal server error',
+            error
+        });
+    }
+}
+
 export const updateProfile = async (req, res) => {
     try {
         const { token } = req.params

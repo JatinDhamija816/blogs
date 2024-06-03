@@ -6,6 +6,7 @@ export const createBlog = async (req, res) => {
     try {
         const { token } = req.params
         const { title, content } = req.body
+        const image = req.file.path
 
         if (!title || !content) {
             return res.status(400).json({
@@ -31,7 +32,7 @@ export const createBlog = async (req, res) => {
             })
         }
 
-        const blog = new Blog({ title, content, author: user._id })
+        const blog = new Blog({ title, content, author: user._id, image })
         await blog.save()
 
         return res.status(201).json({
@@ -86,6 +87,54 @@ export const getBlogByUser = async (req, res) => {
         return res.status(500).json({
             success: false,
             message: 'Error in Get blog by user module',
+            error
+        })
+    }
+}
+
+export const getBlogById = async (req, res) => {
+    try {
+        const { id } = req.params
+
+        const blog = await Blog.findById(id).populate('author', 'username')
+        console.log(blog)
+        return res.status(200).json({
+            success: true,
+            message: 'Blog By id',
+            blog
+        })
+    } catch (error) {
+        console.error('Error in getBlogById', error)
+        return res.status(500).json({
+            success: false,
+            message: 'Error in GetBlogById ',
+            error
+        })
+    }
+}
+
+export const updateBlog = async (req, res) => {
+    try {
+        const { id } = req.params
+        const { title, content } = req.body
+
+        const updateFields = {}
+
+        if (title) updateFields.title = title
+        if (content) updateFields.content = content
+
+        const blog = await Blog.findByIdAndUpdate(id, updateFields, { new: true })
+
+        return res.status(200).json({
+            success: true,
+            message: 'Blog Updated Successfully',
+            blog
+        })
+    } catch (error) {
+        console.error('Error in UpdateBlog ', error)
+        return res.status(500).json({
+            success: false,
+            message: 'Error in Update Blog Module',
             error
         })
     }

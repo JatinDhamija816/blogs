@@ -18,8 +18,16 @@ export const BlogProvider = ({ children }) => {
         const res = await axios.get(`${URL}/getBlogByUser/${token}`)
         return res
     }
+    const getBlogById = async (id) => {
+        const res = await axios.get(`${URL}/getBlogById/${id}`)
+        return res
+    }
+    const UpdateBlogById = async (blogData, id) => {
+        const res = await axios.put(`${URL}/updateBlogById/${id}`, blogData)
+        return res
+    }
     return (
-        <BlogContext.Provider value={{ createBlog, getAllBlog, getBlogByUser }}>
+        <BlogContext.Provider value={{ createBlog, getAllBlog, getBlogByUser, getBlogById, UpdateBlogById }}>
             {children}
         </BlogContext.Provider>
     )

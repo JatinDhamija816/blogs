@@ -1,11 +1,12 @@
 import express from 'express'
-import { getProfile, updateProfile, changePassword, deviceInfo, updateProfilePic } from '../controllers/UserController.js'
-import upload from '../middleware/upload.js'
+import { getProfile, getProfileById, updateProfile, changePassword, deviceInfo, updateProfilePic } from '../controllers/UserController.js'
+import upload from '../middleware/uploadProfilePic.js'
 
 const router = express()
 
 router.get('/getProfile/:token', getProfile)
-router.put('/updateProfile/:token', upload.single('profilePic'), updateProfile)
+router.get('/getProfileById/:id', getProfileById)
+router.put('/updateProfile/:token', updateProfile)
 
 router.put('/updateProfilePic/:token', upload.single('profilePic'), updateProfilePic)
 

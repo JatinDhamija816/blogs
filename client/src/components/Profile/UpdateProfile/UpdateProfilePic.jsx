@@ -16,7 +16,6 @@ const UpdateProfilePic = () => {
         const formData = new FormData();
         formData.append('profilePic', file);
         try {
-
             await updateProfilePic(formData, token);
             window.history.back();
         } catch (error) {

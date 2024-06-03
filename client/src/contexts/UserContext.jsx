@@ -11,6 +11,10 @@ export const UserProvider = ({ children }) => {
         const res = await axios.get(`${URL}/getProfile/${token}`)
         return (res.data.user)
     }
+    const getProfileById = async (id) => {
+        const res = await axios.get(`${URL}/getProfileById/${id}`)
+        return (res.data.user)
+    }
     const updateProfileData = async (user, token) => {
         console.log(user)
         const res = await axios.put(`${URL}/updateProfile/${token}`, user)
@@ -29,7 +33,7 @@ export const UserProvider = ({ children }) => {
         return res.data.activity
     }
     return (
-        <UserContext.Provider value={{ getProfile, updateProfileData, updateProfilePic, changePassword, deviceInfo }}>
+        <UserContext.Provider value={{ getProfile, getProfileById, updateProfileData, updateProfilePic, changePassword, deviceInfo }}>
             {children}
         </UserContext.Provider>)
 }
