@@ -13,7 +13,7 @@ const clearAllCookies = () => {
     }
 };
 
-const URL = 'https://blogs-q477.onrender.com/api/auth'
+const URL = 'http://localhost:8000/api/auth'
 
 export const AuthProvider = ({ children }) => {
 

@@ -7,7 +7,7 @@ import BlogRoute from './routes/BlogRoute.js'
 import deviceInfo from './middleware/getDevice.js'
 const app = express()
 
-const allowedOrigins = ['https://blogs-xi-six.vercel.app'];
+const allowedOrigins = ['http://localhost:5173'];
 
 const corsOptions = {
     origin: function (origin, callback) {

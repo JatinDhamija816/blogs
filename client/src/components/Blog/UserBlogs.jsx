@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const UserBlogs = () => {
     const [blogs, setBlogs] = useState([])
-    const { getBlogByUser } = useContext(BlogContext)
+    const { getBlogByUser, DeleteBlog } = useContext(BlogContext)
     const handleBlogs = async () => {
         try {
             const token = document.cookie.split('=')[1]
@@ -48,7 +48,19 @@ const UserBlogs = () => {
                                 <button className='w-20 py-1 bg-yellow-400 rounded-lg text-md' ><Link to={`/profile/updateBlog/${blog._id}`}>Edit</Link ></button>
                             </div>
                             <div className='m-1 pt-4  flex justify-center '>
-                                <button className='w-20 py-1 bg-red-600 text-white rounded-lg text-md' >Delete</button>
+                                <button className='w-20 py-1 bg-red-600 text-white rounded-lg text-md'
+                                    onClick={
+                                        async () => {
+                                            try {
+                                                await DeleteBlog(blog._id)
+                                                alert('Blog Deleted')
+                                                window.location.reload()
+                                            } catch (error) {
+                                                console.error(error)
+                                            }
+                                        }}
+                                >
+                                    Delete</button>
                             </div>
                         </div>
                     </div>

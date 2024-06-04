@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const BlogContext = createContext()
 
-const URL = 'https://blogs-q477.onrender.com/api/blog'
+const URL = 'http://localhost:8000/api/blog'
 
 export const BlogProvider = ({ children }) => {
     const createBlog = async (blogData, token) => {
@@ -26,8 +26,12 @@ export const BlogProvider = ({ children }) => {
         const res = await axios.put(`${URL}/updateBlogById/${id}`, blogData)
         return res
     }
+    const DeleteBlog = async (id) => {
+        const res = await axios.delete(`${URL}/deleteBlog/${id}`)
+        return res
+    }
     return (
-        <BlogContext.Provider value={{ createBlog, getAllBlog, getBlogByUser, getBlogById, UpdateBlogById }}>
+        <BlogContext.Provider value={{ createBlog, getAllBlog, getBlogByUser, getBlogById, UpdateBlogById, DeleteBlog }}>
             {children}
         </BlogContext.Provider>
     )

@@ -138,3 +138,21 @@ export const updateBlog = async (req, res) => {
         })
     }
 }
+
+export const deleteBlog = async (req, res) => {
+    try {
+        const { id } = req.params
+        await Blog.findByIdAndDelete(id)
+
+        return res.status(200).json({
+            success: true,
+            message: 'Blog Delete Successfully'
+        })
+    } catch (error) {
+        console.error('Error in delete Module ', error)
+        return res.status(500).json({
+            success: false,
+            message: 'Error While Delete Blog'
+        })
+    }
+}
