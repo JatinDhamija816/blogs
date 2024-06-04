@@ -50,7 +50,7 @@ To run this project locally, follow these steps:
    
   * Start the frontend server:
     ```bash
-      cd start
+      cd client
       npm run dev
 ## Usage
 - **Register**: Create a new account.
