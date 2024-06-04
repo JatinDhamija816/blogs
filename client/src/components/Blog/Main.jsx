@@ -40,7 +40,7 @@ const Main = () => {
                                     <img className='w-10 h-10 rounded-full' src="https://static.vecteezy.com/system/resources/thumbnails/010/260/479/small/default-avatar-profile-icon-of-social-media-user-in-clipart-style-vector.jpg" alt="" />
                                 </div>
                                 <div className='flex mx-2'>
-                                    {/* <h1 className='font-semibold text-lg'>{blog.author.username} <span className='font-normal'>{blog.createdAt.slice(0, 10).split('-').reverse().join('-')}</span></h1> */}
+                                    <h1 className='font-semibold text-lg'>{blog.author.username} | <span className='font-normal'>{blog.createdAt.slice(0, 10).split('-').reverse().join('-')}</span></h1>
                                 </div>
                             </div>
                             <div className='mx-5 my-3'>
