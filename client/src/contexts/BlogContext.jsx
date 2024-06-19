@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const BlogContext = createContext()
 
-const URL = 'http://localhost:8000/api/blog'
+const URL = 'https://blogs-q477.onrender.com/api/blog'
 
 export const BlogProvider = ({ children }) => {
     const createBlog = async (blogData, token) => {
